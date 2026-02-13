@@ -7,13 +7,8 @@ The design is fully synchronous, verified through RTL simulation, and intended f
 # Key Features
 
 1. FSM based control logic
-
 2. Supports read and write memory operations
-
 3. Separate CPU side and SRAM side interfaces
-
 4. One cycle wait state for memory access
-
 5. Clean synchronous reset design
-
 6. Fully verified using a Verilog testbench
