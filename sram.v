@@ -1,8 +1,8 @@
 module sram (
     input clk,
-    input cs,
-    input we,
-    input oe,
+    input cs,   // memory select
+    input we,   // write enable
+    input re,   // read enable
     input [3:0] addr,
     input [7:0] wdata,
     output reg [7:0] rdata
