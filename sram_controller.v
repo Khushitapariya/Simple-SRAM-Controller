@@ -17,7 +17,7 @@ module sram_controller (
               READ  = 2'b10,
               DONE  = 2'b11;
 
-    reg cs, we, oe;
+    reg cs, we, re;
     wire [7:0] mem_rdata;
 
     // SRAM instantiation
@@ -25,7 +25,7 @@ module sram_controller (
         .clk(clk),
         .cs(cs),
         .we(we),
-        .oe(oe),
+        .re(re),
         .addr(addr),
         .wdata(wdata),
         .rdata(mem_rdata)
@@ -59,30 +59,30 @@ module sram_controller (
     // Output logic
     always @(posedge clk or posedge reset) begin
         if (reset) begin
-            cs <= 0; we <= 0; oe <= 0;
+            cs <= 0; we <= 0; re <= 0;
             ready <= 0;
             rdata <= 0;
         end
         else begin
             case (state)
                 IDLE: begin
-                    cs <= 0; we <= 0; oe <= 0;
+                    cs <= 0; we <= 0; re <= 0;
                     ready <= 0;
                 end
 
                 WRITE: begin
-                    cs <= 1; we <= 1; oe <= 0;
+                    cs <= 1; we <= 1; re <= 0;
                     ready <= 0;
                 end
 
                 READ: begin
-                    cs <= 1; we <= 0; oe <= 1;
+                    cs <= 1; we <= 0; re <= 1;
                     rdata <= mem_rdata;
                     ready <= 0;
                 end
 
                 DONE: begin
-                    cs <= 0; we <= 0; oe <= 0;
+                    cs <= 0; we <= 0; re <= 0;
                     ready <= 1;
                 end
             endcase
