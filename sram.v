@@ -16,7 +16,7 @@ module sram (
     end
 
     always @(posedge clk) begin
-        if (cs && oe)
+        if (cs && re)
             rdata <= mem[addr];
     end
 
